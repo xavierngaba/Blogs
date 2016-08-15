@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mes candidatures</title>
+</head>
+<body>
+    <h1>Mes candidatures</h1>
+    <table border="1">
+        <thead>
+            <th>Entreprise</th>
+            <th>Poste recherché</th>
+            <th>Adresse</th>
+            <th>ville</th>
+            <th>Etat</th>
+        </thead>
+        <tbody>
+        {% for candidature in candidatures %}
+            <tr>
+                <td>{{ candidature.getNomEntreprise() }}</td>
+                <td><a href="{{ path('candidatureView',{'id': candidature.id}) }}">{{ candidature.poste }}</a></td>
+                <td>{{ candidature.adresse }}</td>
+                <td>{{ candidature.ville }}</td>
+                <td>{{ candidature.etat }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
