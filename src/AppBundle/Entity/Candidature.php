@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Candidature
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\CandidatureRepository")
  */
 
 
@@ -60,6 +60,10 @@ class Candidature
      */
     private $note;
 
+    /**
+     * @ORM\Column(name="dateCr", type="date",)
+     */
+    private $dateCr;
 
     /**
      * Get id
@@ -261,5 +265,29 @@ class Candidature
     public function getNote()
     {
         return $this->note;
+    }
+
+    /**
+     * Set dateCr
+     *
+     * @param \DateTime $dateCr
+     *
+     * @return Candidature
+     */
+    public function setDateCr($dateCr)
+    {
+        $this->dateCr = $dateCr;
+
+        return $this;
+    }
+
+    /**
+     * Get dateCr
+     *
+     * @return \DateTime
+     */
+    public function getDateCr()
+    {
+        return $this->dateCr;
     }
 }

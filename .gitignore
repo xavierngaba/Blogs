@@ -20,6 +20,6 @@
 
 # les fichiers du répertoire web doivent être publiés
 
-/web/js
-/web/css
+/web/template/js
+/web/template/css
 /web/vendor

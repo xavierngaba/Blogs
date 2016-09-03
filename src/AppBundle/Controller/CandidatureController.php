@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\AppBundle;
+use AppBundle\Form\CandidatureType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -17,38 +18,45 @@ class CandidatureController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('user/candidature.html.twig',array('candidatures'=>$this->getAllCandidature()));
+        return $this->render('AppBundle:public:candidature.html.twig',array('candidatures'=>$this->getAllCandidature()));
     }
 
     /**
-     * @Route("/addCandidature", name="addCandidature")
+     * @Route("/profil", name="Profil")
      */
-    public function addAction(Request $request)
+    public function profilAction(Request $request)
     {
-        $candidature1 = new Candidature();
-        $candidature1->setNomEntreprise("ATOS");
-        $candidature1->setPoste("Développeur JAVA H/F");
-        $candidature1->setAdresse("Blagnac 31200");
-        $candidature1->setVille("Toulouse");
-        $candidature1->setEtat("En attente");
-        $candidature2 = new Candidature();
-        $candidature2->setNomEntreprise("ALTRAN");
-        $candidature2->setPoste("Développeur H/F");
-        $candidature2->setAdresse("Blagnac 3100");
-        $candidature2->setVille("Toulouse");
-        $candidature2->setEtat("Confirmé");
-        $candidature3 = new Candidature();
-        $candidature3->setNomEntreprise("DEVIATICS");
-        $candidature3->setPoste("Développeur PHP H/F");
-        $candidature3->setAdresse("Blagnac 31200");
-        $candidature3->setVille("Toulouse");
-        $candidature3->setEtat("Refus");
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($candidature1);
-        $em->persist($candidature2);
-        $em->persist($candidature3);
-        $em->flush();
-        return new Response("Candidature enregistrée avec l'id = ".$candidature1->getId());
+        return $this->render('AppBundle:public:profil.html.twig');
+    }
+
+    /**
+     * @Route("/new", name="New")
+     */
+    public function newAction(Request $request)
+    {
+        $candidature = new Candidature();
+
+        $candidature->setDateCr(new \Datetime('Now'));
+        //On récupère le formulaire
+        $form = $this->createForm(CandidatureType::class,$candidature);
+
+        //On génère le HTML du formulaire crée
+        $formView = $form->createView();
+
+        $form->handleRequest($request);
+
+        //si le formulaire est sousmis
+        if($form->isSubmitted()){
+            //On enregistre la candidature en Bdd
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($candidature);
+            $em->flush();
+
+            return $this->render('AppBundle:public:newoffre.html.twig',array('form'=>$formView,'response'=>'success'));
+        }
+
+        return $this->render('AppBundle:public:newoffre.html.twig',array('form'=>$formView));
     }
 
     /**
@@ -63,6 +71,31 @@ class CandidatureController extends Controller
             throw $this->createNotFoundException('Aucune candidature ne correspond à l\'id!'.$id);
         }
         return $this->render('user/view_candidature.html.twig',array('candidature'=>$candidature));
+    }
+
+    /**
+     * @Route("/editCandidature/{id}", name="EditCandidature", requirements={"id" = "\d+"})
+     */
+    public function editcandidatureAction(Request $request, Candidature $candidature){
+        //On récupère le formulaire
+        $form = $this->createForm(CandidatureType::class,$candidature);
+
+        //On génère le HTML du formulaire crée
+        $formView = $form->createView();
+
+        $form->handleRequest($request);
+
+        //si le formulaire est sousmis
+        if($form->isSubmitted()){
+            //On enregistre la candidature en Bdd
+            $em = $this->getDoctrine()->getManager();
+
+            $em->flush();
+
+            return $this->render('AppBundle:public:editcandidature.html.twig',array('form'=>$formView,'response'=>'success'));
+        }
+
+        return $this->render('AppBundle:public:editcandidature.html.twig',array('form'=>$formView));
     }
 
     public function getAllCandidature(){

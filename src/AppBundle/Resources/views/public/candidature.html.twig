@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Jobs Blogs | Mes Candidatures</title>
+        {% block stylesheets %}
+            <!-- Bootstrap -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        {% endblock %}
+        <!-- Font Awesome -->
+        <link href="{{ asset('template/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+        <!-- iCheck -->
+        <link href="{{ asset('template/css/flat/green.css') }}" rel="stylesheet">
+        <!-- bootstrap-progressbar -->
+        <link href="{{ asset('template/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
+
+        <!-- Datatables -->
+        <link href="{{ asset('template/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('template/css/buttons.bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('template/css/fixedHeader.bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('template/css/responsive.bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('template/css/scroller.bootstrap.min.css') }}" rel="stylesheet">
+
+        <!-- Custom Theme Style -->
+        <link href="{{ asset('template/css/custom.min.css') }}" rel="stylesheet">
+    </head>
+
+    <body class="nav-md">
+        <div class="container body">
+            <div class="main_container">
+                {% include 'AppBundle:public:sidebar.html.twig' %}
+                {% include 'AppBundle:public:nav.html.twig' %}
+                <div class="right_col" role="main">
+                    <div class="">
+                        <div class="page-title">
+                            <div class="title_left">
+                                <h3>Mes candidatures <small>l'ensemble des postes sollicités</small></h3>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="alert alert-info alert-dismissible fade in" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                                    </button>
+                                    <i class="fa fa-quote-left"></i> <strong>En cas de modification cliquer sur l'état de la candidature</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Tableau <small>postulations</small></h2>
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        <p class="text-muted font-13 m-b-30">
+                                            ....
+                                        </p>
+                                        <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th>Nom société</th>
+                                                <th>Poste recherché</th>
+                                                <th>Adresse du Poste</th>
+                                                <th>Ville</th>
+                                                <th>Etat</th>
+                                                <th>Date</th>
+                                                <th>Numéro Tel</th>
+                                                <th>Adresse El.</th>
+                                                <th>Note</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for candidature in candidatures %}
+                                                <tr>
+                                                    <td>{{ candidature.getNomEntreprise() }}</td>
+                                                    <td>{{ candidature.poste }}</td>
+                                                    <td>{{ candidature.adresse }}</td>
+                                                    <td>{{ candidature.ville }}</td>
+                                                    <td><a href="{{ path('EditCandidature',{'id': candidature.id}) }}">{{ candidature.etat }}</a></td>
+                                                    <td>{{ candidature.dateCr|date("m/d/Y") }}</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% include 'AppBundle:public:footer.html.twig' %}
+            </div>
+        </div>
+
+        {% block javascripts %}
+            <!-- jQuery -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+            <!-- Bootstrap -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        {% endblock %}
+        <!-- bootstrap-progressbar -->
+        <script src="{{ asset('template/js/bootstrap-progressbar.min.js') }}"></script>
+
+        <!-- Datatables -->
+        <script src="{{ asset('template/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('template/js/dataTables.bootstrap.min.js') }}"></script>
+        <script src="{{ asset('template/js/dataTables.buttons.min.js') }}"></script>
+        <script src="{{ asset('template/js/buttons.bootstrap.min.js') }}"></script>
+        <script src="{{ asset('template/js/buttons.flash.min.js') }}"></script>
+        <script src="{{ asset('template/js/buttons.html5.min.js') }}"></script>
+        <script src="{{ asset('template/js/buttons.print.min.js') }}"></script>
+        <script src="{{ asset('template/js/dataTables.fixedHeader.min.js') }}"></script>
+        <script src="{{ asset('template/js/dataTables.keyTable.min.js') }}"></script>
+        <script src="{{ asset('template/js/dataTables.responsive.min.js') }}"></script>
+        <script src="{{ asset('template/js/responsive.bootstrap.js') }}"></script>
+        <script src="{{ asset('template/js/datatables.scroller.min.js') }}"></script>
+
+        <!-- bootstrap-daterangepicker -->
+        <script src="{{ asset('template/js/custom.min.js') }}"></script>
+
+        <!-- Datatables -->
+        <script>
+            $(document).ready(function() {
+                var handleDataTableButtons = function() {
+                    if ($("#datatable-buttons").length) {
+                        $("#datatable-buttons").DataTable({
+                            dom: "Bfrtip",
+                            buttons: [
+                                {
+                                    extend: "copy",
+                                    className: "btn-sm"
+                                },
+                                {
+                                    extend: "csv",
+                                    className: "btn-sm"
+                                },
+                                {
+                                    extend: "excel",
+                                    className: "btn-sm"
+                                },
+                                {
+                                    extend: "pdfHtml5",
+                                    className: "btn-sm"
+                                },
+                                {
+                                    extend: "print",
+                                    className: "btn-sm"
+                                },
+                            ],
+                            responsive: true
+                        });
+                    }
+                };
+
+                TableManageButtons = function() {
+                    "use strict";
+                    return {
+                        init: function() {
+                            handleDataTableButtons();
+                        }
+                    };
+                }();
+
+                $('#datatable').dataTable();
+                $('#datatable-keytable').DataTable({
+                    keys: true
+                });
+
+                $('#datatable-responsive').DataTable();
+
+                $('#datatable-scroller').DataTable({
+                    ajax: "js/datatables/json/scroller-demo.json",
+                    deferRender: true,
+                    scrollY: 380,
+                    scrollCollapse: true,
+                    scroller: true
+                });
+
+                var table = $('#datatable-fixed-header').DataTable({
+                    fixedHeader: true
+                });
+
+                TableManageButtons.init();
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Jobs Blogs | Nouv. Candidaturel</title>
+        {% block stylesheets %}
+            <!-- Bootstrap -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        {% endblock %}
+        <!-- Font Awesome -->
+        <link href="{{ asset('template/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+        <!-- iCheck -->
+        <link href="{{ asset('template/css/flat/green.css') }}" rel="stylesheet">
+        <!-- bootstrap-progressbar -->
+        <link href="{{ asset('template/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
+
+        <!-- Custom Theme Style -->
+        <link href="{{ asset('template/css/custom.min.css') }}" rel="stylesheet">
+    </head>
+
+    <body class="nav-md">
+        <div class="container body">
+            <div class="main_container">
+                {% include 'AppBundle:public:sidebar.html.twig' %}
+                {% include 'AppBundle:public:nav.html.twig' %}
+                <!-- page content -->
+                <div class="right_col" role="main">
+                    <div class="">
+                        <div class="page-title">
+                            <div class="title_left">
+                                <h3>Nouvelle Candidature</h3>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            </li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        {{ form_start(form, {'attr': {'class':'form-horizontal form-label-right','novalidate':'novalidate'}}) }}
+                                        <span class="section">Information sur la candidature</span>
+
+                                        <div class="item form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form_widget(form.nom_entreprise,{'attr':{'id':'entrepise','class':'form-control col-md-7 col-xs-12','name':'nom_entreprise','placeholder':'Nom société','required':'required'}}) }}
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form_widget(form.poste,{'attr':{'id':'poste','class':'form-control col-md-7 col-xs-12','name':'poste','placeholder':'Poste proposé','required':'required'}}) }}
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form_widget(form.adresse,{'attr':{'id':'adresse','class':'form-control col-md-7 col-xs-12','name':'adresse','placeholder':'Adresse','required':'required'}}) }}
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form_widget(form.ville,{'attr':{'id':'ville','class':'form-control col-md-7 col-xs-12','name':'ville','placeholder':'Ville','required':'required'}}) }}
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form_widget(form.etat,{'attr':{'id':'etat','class':'form-control col-md-7 col-xs-12','name':'etat','placeholder':'Etat'}}) }}
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form_widget(form.contact,{'attr':{'id':'contact','class':'form-control col-md-7 col-xs-12','name':'contact','placeholder':'Contact'}}) }}
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form_widget(form.email,{'attr':{'id':'email','class':'form-control col-md-7 col-xs-12','name':'email','placeholder':'Email'}}) }}
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {{ form_widget(form.note,{'attr':{'id':'note','class':'form-control col-md-7 col-xs-12','name':'note','placeholder':'Note'}}) }}
+                                            </div>
+                                        </div>
+                                        <div class="ln_solid"></div>
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-md-offset-3">
+                                                <a class="btn btn-primary" href="{{ path('candidatureList') }}"><i class="fa fa-chevron-left"></i> Annuler</a>
+                                                <button id="send" type="submit" class="btn btn-success"><i class="fa fa-floppy-o"></i> Enregistrer</button>
+                                            </div>
+                                        </div>
+                                        {{ form_end(form) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if response is defined and response == 'success'%}
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="alert alert-success alert-dismissible fade in" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                                        </button>
+                                        <strong>Sauvegarde réussi!</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if response is defined and response == 'fail'%}
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                                        </button>
+                                        <strong>Echec de la Sauvegarde !</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- /page content -->
+                {% include 'AppBundle:public:footer.html.twig' %}
+            </div>
+        </div>
+
+        {% block javascripts %}
+            <!-- jQuery -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+            <!-- Bootstrap -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        {% endblock %}
+        <!-- validator -->
+        <script src="{{ asset('template/js/validator.min.js') }}"></script>
+
+        <!-- bootstrap-daterangepicker -->
+        <script src="{{ asset('template/js/custom.min.js') }}"></script>
+
+        <!-- validator -->
+        <script>
+            // initialize the validator function
+            validator.message.date = 'not a real date';
+
+            // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
+            $('form')
+                    .on('blur', 'input[required], input.optional, select.required', validator.checkField)
+                    .on('change', 'select.required', validator.checkField)
+                    .on('keypress', 'input[required][pattern]', validator.keypress);
+
+            $('.multi.required').on('keyup blur', 'input', function() {
+                validator.checkField.apply($(this).siblings().last()[0]);
+            });
+
+            $('form').submit(function(e) {
+                e.preventDefault();
+                var submit = true;
+
+                // evaluate the form using generic validaing
+                if (!validator.checkAll($(this))) {
+                    submit = false;
+                }
+
+                if (submit)
+                    this.submit();
+
+                return false;
+            });
+        </script>
+        <!-- /validator -->
+    </body>
+</html>

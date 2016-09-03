@@ -1,0 +1,102 @@
+<div class="right_col" role="main">
+    <!-- top tiles -->
+    <div class="row tile_count">
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-newspaper-o"></i> Total Offres</span>
+            <div class="count">{{ total }}</div>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-refresh"></i> Total en attentes</span>
+            <div class="count">{{ attente }}</div>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-users"></i> Total entretien</span>
+            <div class="count">{{ entretient }}</div>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-thumbs-down"></i> Total refus</span>
+            <div class="count green">{{ refus }}</div>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-bell-slash"></i> Total Pas de réponse</span>
+            <div class="count">{{ pr }}</div>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-child"></i> Total confirmé</span>
+            <div class="count">{{ confirme }}</div>
+        </div>
+    </div>
+    <!-- /top tiles -->
+    <br />
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel tile fixed_height_320 overflow_hidden">
+                <div class="x_title">
+                    <h2>Statistique des candidatures</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table class="" style="width:100%">
+                        <tr>
+                            <th style="width:37%;">
+                                <p>Estimation</p>
+                            </th>
+                            <th>
+                                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                    <p class="">Etat</p>
+                                </div>
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                                    <p class="">Pourcentage</p>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <canvas id="canvas1" height="160" width="160" style="margin: 15px 10px 10px 0"></canvas>
+                            </td>
+                            <td>
+                                <table class="tile_info">
+                                    <tr>
+                                        <td>
+                                            <p><i class="fa fa-square"></i>En Attente </p>
+                                        </td>
+                                        <td>{{ (attente/total)*100 }}%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p><i class="fa fa-square green"></i>Entretient </p>
+                                        </td>
+                                        <td>{{ (entretient/total)*100 }}%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p><i class="fa fa-square purple"></i>Refus </p>
+                                        </td>
+                                        <td>{{ (refus/total)*100 }}%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p><i class="fa fa-square red"></i>Pas de réponse </p>
+                                        </td>
+                                        <td>{{ (pr/total)*100 }}%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p><i class="fa fa-square blue"></i>Confirmé </p>
+                                        </td>
+                                        <td>{{ (confirme/total)*100 }}%</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

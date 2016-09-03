@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Jobs Blogs | Accueil</title>
+        {% block stylesheets %}
+            <!-- Bootstrap -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        {% endblock %}
+        <!-- Font Awesome -->
+        <link href="{{ asset('template/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+        <!-- iCheck -->
+        <link href="{{ asset('template/css/flat/green.css') }}" rel="stylesheet">
+        <!-- bootstrap-progressbar -->
+        <link href="{{ asset('template/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
+
+        <!-- Datatables -->
+        <link href="{{ asset('template/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('template/css/buttons.bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('template/css/fixedHeader.bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('template/css/responsive.bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('template/css/scroller.bootstrap.min.css') }}" rel="stylesheet">
+
+        <!-- Custom Theme Style -->
+        <link href="{{ asset('template/css/custom.min.css') }}" rel="stylesheet">
+    </head>
+
+    <body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            {% include 'AppBundle:public:sidebar.html.twig' %}
+            {% include 'AppBundle:public:nav.html.twig' %}
+            {% include 'AppBundle:public:contain.html.twig' %}
+            {% include 'AppBundle:public:footer.html.twig' %}
+        </div>
+    </div>
+
+    {% block javascripts %}
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% endblock %}
+    <!-- Chart.js -->
+    <script src="{{ asset('template/js/Chart.min.js') }}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{{ asset('template/js/bootstrap-progressbar.min.js') }}"></script>
+
+    <!-- Datatables -->
+    <script src="{{ asset('template/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('template/js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('template/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('template/js/buttons.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('template/js/buttons.flash.min.js') }}"></script>
+    <script src="{{ asset('template/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('template/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('template/js/dataTables.fixedHeader.min.js') }}"></script>
+    <script src="{{ asset('template/js/dataTables.keyTable.min.js') }}"></script>
+    <script src="{{ asset('template/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('template/js/responsive.bootstrap.js') }}"></script>
+    <script src="{{ asset('template/js/datatables.scroller.min.js') }}"></script>
+
+    <!-- bootstrap-progressbar -->
+    <script src="{{ asset('template/js/bootstrap-progressbar.min.js') }}"></script>
+
+    <!-- bootstrap-daterangepicker -->
+    <script src="{{ asset('template/js/daterangepicker.js') }}"></script>
+
+    <!-- validator -->
+    <script src="{{ asset('template/js/validator.min.js') }}"></script>
+
+    <!-- bootstrap-daterangepicker -->
+    <script src="{{ asset('template/js/custom.min.js') }}"></script>
+    <!-- Doughnut Chart -->
+    <script>
+        $(document).ready(function(){
+            var options = {
+                legend: false,
+                responsive: false
+            };
+            new Chart(document.getElementById("canvas1"), {
+                type: 'doughnut',
+                tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+                data: {
+                    labels: [
+                        "En Attente",
+                        "Entretient",
+                        "Refus",
+                        "Pas de réponse",
+                        "Confirmé"
+                    ],
+                    datasets: [{
+                        data: [{{ (attente/total)*100 }}, {{ (entretient/total)*100 }}, {{ (refus/total)*100 }},
+                            {{ (pr/total)*100 }}, {{ (confirme/total)*100 }}],
+                        backgroundColor: [
+                            "#909796",
+                            "#26B99A",
+                            "#9B59B6",
+                            "#E74C3C",
+                            "#3498DB"
+                        ],
+                        hoverBackgroundColor: [
+                            "#313433",
+                            "#026658",
+                            "#33003A",
+                            "#5C0002",
+                            "#003A57"
+                        ]
+                    }]
+                },
+                options: options
+            });
+        });
+    </script>
+    <!-- /Doughnut Chart -->
+    <!-- Datatables -->
+    <script>
+        $(document).ready(function() {
+            var handleDataTableButtons = function() {
+                if ($("#datatable-buttons").length) {
+                    $("#datatable-buttons").DataTable({
+                        dom: "Bfrtip",
+                        buttons: [
+                            {
+                                extend: "copy",
+                                className: "btn-sm"
+                            },
+                            {
+                                extend: "csv",
+                                className: "btn-sm"
+                            },
+                            {
+                                extend: "excel",
+                                className: "btn-sm"
+                            },
+                            {
+                                extend: "pdfHtml5",
+                                className: "btn-sm"
+                            },
+                            {
+                                extend: "print",
+                                className: "btn-sm"
+                            },
+                        ],
+                        responsive: true
+                    });
+                }
+            };
+
+            TableManageButtons = function() {
+                "use strict";
+                return {
+                    init: function() {
+                        handleDataTableButtons();
+                    }
+                };
+            }();
+
+            $('#datatable').dataTable();
+            $('#datatable-keytable').DataTable({
+                keys: true
+            });
+
+            $('#datatable-responsive').DataTable();
+
+            $('#datatable-scroller').DataTable({
+                ajax: "js/datatables/json/scroller-demo.json",
+                deferRender: true,
+                scrollY: 380,
+                scrollCollapse: true,
+                scroller: true
+            });
+
+            var table = $('#datatable-fixed-header').DataTable({
+                fixedHeader: true
+            });
+
+            TableManageButtons.init();
+        });
+    </script>
+    <!-- validator -->
+    <script>
+        // initialize the validator function
+        validator.message.date = 'not a real date';
+
+        // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
+        $('form')
+                .on('blur', 'input[required], input.optional, select.required', validator.checkField)
+                .on('change', 'select.required', validator.checkField)
+                .on('keypress', 'input[required][pattern]', validator.keypress);
+
+        $('.multi.required').on('keyup blur', 'input', function() {
+            validator.checkField.apply($(this).siblings().last()[0]);
+        });
+
+        $('form').submit(function(e) {
+            e.preventDefault();
+            var submit = true;
+
+            // evaluate the form using generic validaing
+            if (!validator.checkAll($(this))) {
+                submit = false;
+            }
+
+            if (submit)
+                this.submit();
+
+            return false;
+        });
+    </script>
+    <!-- /validator -->
+    <!-- datepicker -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            var cb = function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                //alert("Callback has fired: [" + start.format('MMMM D, YYYY') + " to " + end.format('MMMM D, YYYY') + ", label = " + label + "]");
+            }
+
+            var optionSet1 = {
+                startDate: moment().subtract(29, 'days'),
+                endDate: moment(),
+                minDate: '01/01/2012',
+                maxDate: '12/31/2015',
+                dateLimit: {
+                    days: 60
+                },
+                showDropdowns: true,
+                showWeekNumbers: true,
+                timePicker: false,
+                timePickerIncrement: 1,
+                timePicker12Hour: true,
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                opens: 'left',
+                buttonClasses: ['btn btn-default'],
+                applyClass: 'btn-small btn-primary',
+                cancelClass: 'btn-small',
+                format: 'MM/DD/YYYY',
+                separator: ' to ',
+                locale: {
+                    applyLabel: 'Submit',
+                    cancelLabel: 'Clear',
+                    fromLabel: 'From',
+                    toLabel: 'To',
+                    customRangeLabel: 'Custom',
+                    daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+                    monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                    firstDay: 1
+                }
+            };
+            $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+            $('#reportrange').daterangepicker(optionSet1, cb);
+            $('#reportrange').on('show.daterangepicker', function() {
+                console.log("show event fired");
+            });
+            $('#reportrange').on('hide.daterangepicker', function() {
+                console.log("hide event fired");
+            });
+            $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
+                console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+            });
+            $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
+                console.log("cancel event fired");
+            });
+            $('#options1').click(function() {
+                $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+            });
+            $('#options2').click(function() {
+                $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+            });
+            $('#destroy').click(function() {
+                $('#reportrange').data('daterangepicker').remove();
+            });
+        });
+    </script>
+    <!-- /datepicker -->
+    </body>
+</html>
