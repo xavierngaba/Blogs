@@ -2,11 +2,11 @@
 
 namespace AppBundle\Form;
 
-use Doctrine\DBAL\Types\DateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -32,8 +32,10 @@ class CandidatureType extends AbstractType
                         'Confirme' => 'Confirme'
                 )
             ))
-            ->add('date',DateType::class, array(
-                    'widget' => 'choice'
+            ->add('dateCr',DateType::class, array(
+                'format' => 'yyyy-MM-dd',
+                'html5' => true,
+                'widget' => 'single_text'
             ))
             ->add('contact',TextType::class)
             ->add('email', EmailType::class)

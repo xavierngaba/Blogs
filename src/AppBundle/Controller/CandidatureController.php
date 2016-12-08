@@ -36,7 +36,6 @@ class CandidatureController extends Controller
     {
         $candidature = new Candidature();
 
-        $candidature->setDateCr(new \Datetime('Now'));
         //On récupère le formulaire
         $form = $this->createForm(CandidatureType::class,$candidature);
 

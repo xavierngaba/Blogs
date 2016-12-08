@@ -18,7 +18,8 @@
         <link href="{{ asset('template/css/flat/green.css') }}" rel="stylesheet">
         <!-- bootstrap-progressbar -->
         <link href="{{ asset('template/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
-
+        <!-- jQuery UI -->
+        <link rel="stylesheet" href="{{ asset('template/css/jquery-ui.css') }}">
         <!-- Custom Theme Style -->
         <link href="{{ asset('template/css/custom.min.css') }}" rel="stylesheet">
     </head>
@@ -79,7 +80,7 @@
                                         </div>
                                         <div class="item form-group">
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                {{ form_widget(form.date,{'attr':{'id':'date','class':'date-picker form-control col-md-7 col-xs-12','name':'Date','placeholder':'Date','required':'required'}}) }}
+                                                {{ form_widget(form.dateCr,{'attr':{'id':'dateCr','class':'form-control col-md-7 col-xs-12','name':'Date Offre','placeholder':'Date','required':'required'}}) }}
                                             </div>
                                         </div>
                                         <div class="item form-group">
@@ -143,12 +144,24 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
             <!-- Bootstrap -->
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <!-- jQuery UI -->
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         {% endblock %}
         <!-- validator -->
         <script src="{{ asset('template/js/validator.min.js') }}"></script>
 
         <!-- bootstrap-daterangepicker -->
         <script src="{{ asset('template/js/custom.min.js') }}"></script>
+
+        <!-- bootstrap-datepicker -->
+        <script>
+            $(document).ready(function() {
+                $('#dateCr').datepicker({
+                    format: 'yyyy-mm-dd'
+                });
+            });
+        </script>
+        <!-- /bootstrap-datepicker -->
 
         <!-- validator -->
         <script>

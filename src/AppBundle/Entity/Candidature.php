@@ -61,7 +61,7 @@ class Candidature
     private $note;
 
     /**
-     * @ORM\Column(name="dateCr", type="date",)
+     * @ORM\Column(name="dateCr", type="date")
      */
     private $dateCr;
 
