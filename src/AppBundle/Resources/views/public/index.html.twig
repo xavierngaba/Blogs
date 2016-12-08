@@ -95,8 +95,8 @@
                         "Confirmé"
                     ],
                     datasets: [{
-                        data: [{{ (attente/total)*100 }}, {{ (entretient/total)*100 }}, {{ (refus/total)*100 }},
-                            {{ (pr/total)*100 }}, {{ (confirme/total)*100 }}],
+                        data: [{{ ((attente/total)*100)|round }}, {{ ((entretient/total)*100)|round }}, {{ ((refus/total)*100)|round }},
+                            {{ ((pr/total)*100)|round }}, {{ ((confirme/total)*100)|round }}],
                         backgroundColor: [
                             "#909796",
                             "#26B99A",

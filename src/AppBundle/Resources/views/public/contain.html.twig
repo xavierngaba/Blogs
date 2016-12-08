@@ -65,31 +65,31 @@
                                         <td>
                                             <p><i class="fa fa-square"></i>En Attente </p>
                                         </td>
-                                        <td>{{ (attente/total)*100 }}%</td>
+                                        <td>{{ ((attente/total)*100)|round }}%</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <p><i class="fa fa-square green"></i>Entretient </p>
                                         </td>
-                                        <td>{{ (entretient/total)*100 }}%</td>
+                                        <td>{{ ((entretient/total)*100)|round }}%</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <p><i class="fa fa-square purple"></i>Refus </p>
                                         </td>
-                                        <td>{{ (refus/total)*100 }}%</td>
+                                        <td>{{ ((refus/total)*100)|round }}%</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <p><i class="fa fa-square red"></i>Pas de réponse </p>
                                         </td>
-                                        <td>{{ (pr/total)*100 }}%</td>
+                                        <td>{{ ((pr/total)*100)|round }}%</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <p><i class="fa fa-square blue"></i>Confirmé </p>
                                         </td>
-                                        <td>{{ (confirme/total)*100 }}%</td>
+                                        <td>{{ ((confirme/total)*100)|round }}%</td>
                                     </tr>
                                 </table>
                             </td>

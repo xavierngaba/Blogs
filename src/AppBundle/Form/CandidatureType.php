@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Doctrine\DBAL\Types\DateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -24,12 +25,15 @@ class CandidatureType extends AbstractType
             ->add('ville',TextType::class)
             ->add('etat',ChoiceType::class, array(
                     'choices' => array(
-                        'Attente' => 'attente',
-                        'Entretien' => 'entretien',
-                        'Refus' => 'refus',
-                        'Pas reponse' => 'pas de reponse',
-                        'Confirme' => 'confirmé'
+                        'Attente' => 'En Attente',
+                        'Entretien' => 'Entretient',
+                        'Refus' => 'Refus',
+                        'Pas reponse' => 'Pas de reponse',
+                        'Confirme' => 'Confirme'
                 )
+            ))
+            ->add('date',DateType::class, array(
+                    'widget' => 'choice'
             ))
             ->add('contact',TextType::class)
             ->add('email', EmailType::class)
